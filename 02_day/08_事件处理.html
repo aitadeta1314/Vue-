@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="../00-js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>欢迎来到{{name}}学习</h2>
+        <button v-on:click="showAlertInfo">点我弹框信息（不传参）</button>
+        <!-- $event占位符，传参 -->
+        <button @click="showAlertInfo2($event, 666)">事件写法2（传参）</button>
+
+        <!-- 
+            Vue事件修饰符 1\2\3
+            1. prevent: 阻止默认事件。
+            2. stop: 阻止时间冒泡。 @click.stop
+            3. once: 事件只触发一次。@click.once
+            capture: 事件捕获阶段触发。 @click.capture
+            self: 只有event.target是当前操作的元素时才触发事件。 @click.self
+         -->
+        <a href="https://baidu.com" @click.prevent="showBaidu">事件修饰符</a>
+    </div>
+
+    <script>
+
+let vm = new Vue({el: "#root", data: {
+        name: "浙江大学",
+    }, methods: {
+        showAlertInfo(event) {
+            // alert("弹出alert了")
+            // console.log(event.target.innerText)
+            console.log(this) // this 就是vm
+        },
+        showAlertInfo2(event, id) {
+            console.log(event);
+            console.log(id);
+        },
+        showBaidu(e) {
+            // 阻止跳转， vue中另一个写法 @click.prevent
+            // e.preventDefault();
+            alert('百度')
+        }
+    },});
+    </script>
+</body>
+</html>

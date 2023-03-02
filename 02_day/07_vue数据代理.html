@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="../00-js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <p>{{ name }}</p>
+        <p>{{ address}}</p>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+
+        let vm = new Vue({
+            el: "#root", 
+            data: {
+                name: "我是姓名",
+                address: "我是地址"
+            }
+        });
+    </script>
+</body>
+</html>

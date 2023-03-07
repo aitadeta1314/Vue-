@@ -18,12 +18,16 @@
         <!-- 
             Vue事件修饰符 1\2\3
             1. prevent: 阻止默认事件。
-            2. stop: 阻止时间冒泡。 @click.stop
+            2. stop: 阻止冒泡。 @click.stop
             3. once: 事件只触发一次。@click.once
             capture: 事件捕获阶段触发。 @click.capture
             self: 只有event.target是当前操作的元素时才触发事件。 @click.self
          -->
         <a href="https://baidu.com" @click.prevent="showBaidu">事件修饰符</a>
+        <div @click="showBaidu">
+            <!-- 事件修饰符可以连续写 -->
+            <a href="https://baidu.com" @click.stop.prevent="showBaidu">事件冒泡测试</a>
+        </div>
     </div>
 
     <script>

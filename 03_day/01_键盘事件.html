@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>键盘事件</title>
+    <style>
+        #root {
+            height: 200px;
+            width: 200px;
+            background-color: yellowgreen;
+        }
+    </style>
+    <script src="../00-js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <input type="text" placeholder="按下回车提示输入" @keyup="showInfo">
+        <!-- 
+
+            Vue的键盘别名：
+                enter: 回车键
+                delete: 删除，退格键
+                esc: 退出键
+                space: 空格键
+                tab: 换行键 （特殊，必须使用@keydown使用）
+            
+            系统修饰键：ctrl、alt、shift、meta(win键或command键)
+                - 配合@keyup使用: 按下对应的系统修饰键，然后再按下其他键（比如字母键），再松开之后，触发。
+                - 配合@keydown使用: 正常触发。
+         -->
+        <input type="text" placeholder="按下回车提示输入" @keyup.alt="showInfoWithVue">
+        <input type="text" placeholder="按下tab键提示" @keydown.tab="showTabWithVue">
+        <input type="text" placeholder="按下切换大小写键提示" @keyup.caps-lock="showkeyup">
+        <input type="text" placeholder="按下系统修饰键提示" @keyup.meta="showkeyup">
+        <!-- 只有在按下ctrl+y的时候触发 -->
+        <input type="text" placeholder="按下系统修饰键ctrl+y提示" @keyup.ctrl.y="showkeyup">
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                a: 1
+            },
+            beforeCreate() {
+                console.log('beforeCreate')
+            },
+            created () {
+                console.log('created')
+                console.log("a is ", this.a)
+            },
+            methods: {
+                showInfo(e) {
+                    // console.log(e.keyCode)
+                    // e.keyCode表示键盘专有的代码, 这是js代码；
+                    // 使用Vue： @keyup.enter="showInfo"
+                    if (e.keyCode != 13) return
+                    console.log(e.target.value)
+                },
+                showInfoWithVue(e) {
+                    console.log(e.target.value)  
+                },
+                showTabWithVue(e){
+                    alert('按下了tab键啦')
+                },
+                showkeyup(e) {
+                    // 如果Vue中没有键盘别名，可以直接使用@keyup.caps-lock='methods'
+                    console.log(e.key, e.keyCode)
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算属性、监视属性</title>
+    <script src="../00-js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      今天天气很{{info}}<br />
+      <button @click="changeInfo">点我切换</button>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          isHot: true,
+        },
+        methods: {
+          changeInfo() {
+            this.isHot = !this.isHot;
+          },
+        },
+        // 完整写法
+        computed: {
+          info: {
+            get() {
+              return this.isHot ? "炎热" : "寒冷";
+            },
+            set(value) {
+              // ...
+            },
+          },
+        },
+        // computed简写: 仅限于只有get()情况下, info()不是一个函数，info为计算属性
+        // 同样也有watch简写：仅限于只有handler函数情况下简写。
+        // computed: {
+        //     info() {
+        //         return this.isHot ? "炎热" : "寒冷"
+        //     }
+        // },
+
+        //~~~~！！！ computed 计算属性 VS watch 侦听属性（监视属性）
+        // 1. 没有异步操作的时候，计算属性、侦听属性都可以实现，优先选择计算属性实现；
+        // 2. 有异步操作的时候，优先选择侦听属性，不能使用计算属性。
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>姓名案例-差值语法实现</title>
+    <script src="../00-js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      姓：<input type="text" v-model="firstName" /> <br />
+      名：<input type="text" v-model:value="lastName" /><br />
+      姓名：<span>{{firstName}}-{{lastName}}</span>
+
+      <br />
+      <div>{{number.a}}</div>
+      <button v-on:click="number.a++">点我a+1</button>
+      <br />
+
+      <button style="margin-top: 30px" v-on:click="number.a++">
+        深度监视按钮
+      </button>
+    </div>
+    <script>
+      Vue.config.productionTip = false;
+
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          firstName: "张",
+          lastName: "三",
+          number: {
+            a: 1,
+            b: 1,
+          },
+        },
+        /// 监视写法1, 监视属性必须存在才能被监视。
+        watch: {
+          // 'firstName'
+          // firstName: {
+          //     // immediate: true, // 初始化时，调用一下handler
+          //     handler(newValue, oldValue) {
+          //         console.log("我被监视啦： ", newValue, oldValue)
+          //     }
+          // },
+          // // !!!! 简写形式：只有handler函数没有其他配置项的时候可使用简写。
+          // firstName(newValue, oldValue) {
+          //     console.log("我被监视啦： ", newValue, oldValue);
+          // },
+          /// 原始写法就是 key - value形势，key为String;
+          // 监视多级结构中某个属性的变化。
+          "number.a": {
+            handler(newValue, oldValue) {
+              console.log("a被监视啦");
+            },
+          },
+          // 监视多级结构中所有属性的变化。
+          // 设置deep为true. 为深度监视
+          number: {
+            deep: true,
+            handler(newValue, oldValue) {
+              console.log("number改变了", newValue.a, oldValue.a);
+            },
+          },
+        },
+      });
+      /// 监视写法2
+      vm.$watch("lastName", {
+        handler(newValue, oldValue) {
+          console.log("我是lastName，我被监视啦：", newValue, oldValue);
+        },
+      });
+      // Vue管理的函数不能写成箭头函数，否则this是有问题的；
+      // 1. 若写成箭头函数，this表示的是window；
+      // 2. 若写成普通函数，this表示的是当前vue；
+      vm.$watch("firstName", function (newValue, oldValue) {
+        console.log(this);
+        console.log("firstName被监视了，firstName值为", newValue, oldValue);
+      });
+
+      // 写成箭头函数
+      // vm.$watch('firstName', (newValue, oldValue)=> {
+      //         console.log(this);// 打印的是window
+      //         console.log('firstName被监视了，firstName值为', newValue, oldValue);
+      // })
+    </script>
+  </body>
+</html>

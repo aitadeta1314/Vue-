@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-show、v-if</title>
+    <script src="../00-js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <div v-show="true">你好，v-show</div>
+      <button @click="toggle">切换语言</button>
+      <button @click="toggleTitle">切换显示标题</button>
+      <div v-if="chinese">你好</div>
+      <div v-else>Hello</div>
+      <template v-if="n===1">
+        <h2>您好</h2>
+        <h2>西湖</h2>
+        <h2>杭州</h2>
+      </template>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#root",
+        data: {
+          n: 1,
+          chinese: true,
+        },
+        methods: {
+          toggle() {
+            this.chinese = !this.chinese;
+          },
+          toggleTitle() {
+            this.n++;
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

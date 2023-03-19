@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>列表过滤</title>
+    <script src="../00-js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <input v-model:value="keyWord" type="text" />
+      <ul>
+        <li v-for="(item, index) in filterItems">
+          {{item.name}} - {{item.age}}
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#root",
+        data: {
+          keyWord: "",
+          items: [
+            { name: "周冬雨", age: 25 },
+            { name: "周杰伦", age: 30 },
+            { name: "马冬梅", age: 39 },
+            { name: "周杰", age: 23 },
+          ],
+        },
+        computed: {
+          filterItems() {
+            // !!!important
+            /// 'abc'.indexOf('') = 0;
+            // 'abc'.indexOf('a') = 0;
+            return this.items.filter((p) => {
+              return p.name.indexOf(this.keyWord) !== -1;
+            });
+          },
+        },
+      });
+
+      var arr = [1, 3, 2, 4, 6, 5];
+      arr.sort((a, b) => {
+        return b - a;
+      });
+      console.log(arr);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收集表单数据</title>
+    <script src="../00-js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <form @submit.prevent="submitContent">
+            <!-- label中for 和input中id关联，可以点击账号使input输入框获取焦点 -->
+            <label for="account">账号：</label>
+            <input type="text" id="account" v-model.trim="userInfo.account">
+            <br><br>
+            <label for="password">密码：</label>
+            <input type="password" id="password" v-model="userInfo.password">
+            <br><br>
+            <!-- type='number'控制输入的是数字，v-model.number控制data数据为number类型。 -->
+            年龄：<input type="number" v-model.number="userInfo.age">
+            <br><br>
+
+            性别：
+            <!-- type为radio时，name相同可以做关联 -->
+            <!-- v-model默认收集的是value值。 所以对于radio类型，需要设置value值-->
+            男<input type="radio" name="sex" v-model:value="userInfo.sex" value="man">
+            女<input type="radio" name="sex" v-model:value="userInfo.sex" value="woman">
+            <br><br>
+
+            爱好：
+            抽烟<input type="checkbox" v-model="userInfo.hobby" value="smoking">
+            喝酒<input type="checkbox" v-model="userInfo.hobby" value="drinking">
+            玩游戏<input type="checkbox" v-model="userInfo.hobby" value="playing">
+            <br><br>
+
+            校区：
+            <select v-model="userInfo.city">
+                <option value="">请选择校区</option>
+                <option value="beijing">北京</option>
+                <option value="shenzhen">深圳</option>
+                <option value="shanghai">上海</option>
+                <option value="qingdao">青岛</option>
+            </select>
+            <br><br>
+            <!-- v-model.lazy表示失去焦点之后，获取值 -->
+            <!-- v-model.trim表示获取去掉字符串前后空格的值 -->
+            其他信息：<textarea v-model.lazy="userInfo.otherInfo"></textarea>
+            <br><br>
+            <input type="checkbox" v-model="userInfo.agree">阅读并接受<a href="https://google.com">《用户协议》</a>
+            <br><br>
+            <button>提交</button>
+        </form>
+
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                userInfo: {
+                    account: '',
+                    password: '',
+                    age:'',
+                    sex: 'man',
+                    hobby: ['drinking'], /// 多选框checkbox必须设置初始化为数组，否则有错误。
+                    city: '',
+                    otherInfo: '',
+                    agree: true,
+                }
+            },
+            methods: {
+                submitContent() {
+                    console.log(JSON.stringify(this._data))
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

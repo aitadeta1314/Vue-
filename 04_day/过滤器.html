@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器</title>
+    <script src="../00-js/vue.js"></script>
+    <!-- 引入dayjs组件 -->
+    <script src="../00-js/dayjs.min.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>显示格式化之后的时间</h1>
+        <!-- 计算属性实现 -->
+        <h3>现在时间是：{{timeFormatter}}</h3>
+        <!-- methods实现 -->
+        <h3>现在时间是：{{getFmtFormatter()}}</h3>
+
+        <!-- 过滤器实现 -->
+        <!-- 过滤器只用于
+            1. 插值语法{{}}, 
+            2. v-bind:x='time | mySlice' 
+        -->
+        <h3>现在时间是：{{time | filterFmtFormatter}}</h3>
+        <!-- 默认传递两个参数，第一个就是time -->
+        <h3>现在时间是：{{time | filterFmtFormatter('YYYY_MM_DD')}}</h3>
+        <!-- 层层往下传递 -->
+        <h3>现在时间是：{{time | filterFmtFormatter('YYYY_MM_DD') | mySlice}}</h3>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        // 全局过滤器
+        Vue.filter("mySlice", function(value){
+            return value.slice(0, 4)
+        })
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    time: 1679466743727,
+                }
+            },
+            computed: {
+                // 计算属性简写
+                timeFormatter(){
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            methods: {
+                getFmtFormatter() {
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            // 局部过滤器
+            filters: {
+                filterFmtFormatter: function(value, formatter='YYYY-MM-DD HH:mm:ss') {
+                    return dayjs(value).format(formatter)
+                },
+                // mySlice(value) {
+                //     return value.slice(0, 4)
+                // },
+            }
+        })
+    </script>
+</body>
+
+</html>

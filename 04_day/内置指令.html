@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内置指令</title>
+    <style>
+        /* [v-cloak]表示选中所有标签里边有v-cloak属性的元素*/
+        /* 可以在网速过慢的时候使用，将未经解析的模版绘制到页面上来，
+        使用css配合v-cloak可以解决网速慢时页面展示出{{XXX}} 的问题。*/
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <script src="../00-js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div>你好，{{name}}</div>
+        <!-- v-text用的少，插值语法简单  -->
+        <div v-text="name"></div>
+        <!-- v-text解析不了，只能作为文本进行替换 -->
+        <div v-text="h3Str"></div>
+        <div v-html="h3Str"></div>
+        <div v-cloak>{{abc}}</div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                name: '浙江大学国家大学科技园',
+                h3Str: '<h3>我是H3标签</h3>'
+            },
+        })
+    </script>
+</body>
+</html>

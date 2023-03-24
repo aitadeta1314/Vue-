@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令</title>
+    <script src="../00-js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <div>当前的n值为<span v-text="n"></span></div>
+        <!-- 自定义指令v-big -->
+        <div>放大十倍后的n值为<span v-big="n"></span></div>
+        <!-- `多个单词`自定义指令 -->
+        <div>放大百倍后的n值为<span v-big-number="n"></span></div>
+        <button @click="n++">点我+1</button>
+
+        <br>
+        <input type="text" v-fbind:value="n">
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        // 定义全局指令哈~~~~~~ 和filter一样，去掉末尾的s
+        Vue.directive('fbind', { // ！！！对象式写法（细分的写法）
+            // 1. 指令与元素成功绑定bind时（一上来）
+            bind(element, binding) {
+                console.log('bind methods');
+                element.value = binding.value
+            },
+            // 指令所在元素被插入页面时。
+            inserted(element, binding) {
+                console.log('inserted methods');
+                element.focus()
+            },
+            // 2. 指令所在的模版被重新解析时update。
+            update(element, binding) {
+                console.log('update methods');
+                element.value = binding.value
+            },
+        })
+        new Vue({
+            el: '#root',
+            data: {
+                n: 1,
+
+            },
+            // 局部指令哈~~~~~
+            directives: {
+                // big函数何时被调用？1. 指令与元素成功绑定bind时（一上来）。2. 指令所在的模版被重新解析时update。
+                big(element, binding) {
+                    // ！！！函数式写法，其实就是`对象式写法`中的bind\update方法，
+                    // 因为bind\update方法一般是相同的逻辑。
+                    // element真实DOM。binding里，包含有绑定的元素值。
+                    // console.log(element instanceof HTMLElement)
+                    // console.log(element, binding)
+                    // console.dir(element)
+                    // console.log(binding.value)
+                    element.innerText = binding.value * 10
+                    console.log('big methods: ', this) // !!! directives里的this都是window。
+                },
+                // 'big-number': function(element, binding) { // 写法1
+                'big-number'(element, binding) { // 写法2
+                    element.innerText = binding.value * 100
+                },
+                // fbind: { // ！！！对象式写法（细分的写法）
+                //     // 1. 指令与元素成功绑定bind时（一上来）
+                //     bind(element, binding) {
+                //         console.log('bind methods');
+                //         element.value = binding.value
+                //     },
+                //     // 指令所在元素被插入页面时。
+                //     inserted(element, binding) { 
+                //         console.log('inserted methods');
+                //         element.focus()
+                //     },
+                //     // 2. 指令所在的模版被重新解析时update。
+                //     update(element, binding) {
+                //         console.log('update methods');
+                //         element.value = binding.value
+                //     },
+                // }
+            },
+        });
+    </script>
+</body>
+
+</html>

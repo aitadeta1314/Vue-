@@ -14,7 +14,7 @@
         <div>当前的n值为<span v-text="n"></span></div>
         <!-- 自定义指令v-big -->
         <div>放大十倍后的n值为<span v-big="n"></span></div>
-        <!-- `多个单词`自定义指令 -->
+        <!-- `多个单词`自定义指令, 不要用驼峰形式camelCase组合(userName)单词，使用kebab-case形式(user-name)， -->
         <div>放大百倍后的n值为<span v-big-number="n"></span></div>
         <button @click="n++">点我+1</button>
 

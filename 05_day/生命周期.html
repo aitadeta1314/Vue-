@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+    <script src="../00-js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- {opacity:opacity} 对象的简写形式{opacity} -->
+        <p :style="{opacity}">渐变的P标签</p>        
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    opacity: 1,
+                };
+            },
+            // Vue完成模版的解析并把初始的真实DOM元素放入页面后（挂载完毕）调用mounted方法
+            mounted() {
+                console.log('================================mounted');
+                setInterval(() => { // 写成箭头函数，this值往外层找，找到mounted函数了，也就是当前vue
+                     this.opacity -= 0.01
+                     if (this.opacity <= 0) {
+                        this.opacity = 1;
+                     }
+                }, 16);// 毫秒
+            },
+        })
+    </script>
+</body>
+</html>

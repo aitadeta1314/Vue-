@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组件</title>
+    <!-- 
+        模块：向外提供特定功能的js程序，一般就是一个js文件。
+        组件：用来实现局部特定功能效果的代码集合（html/css/js/image/mp4...)
+        模块化：应用中的庞大的js，拆分成多个文件，比如a.js\b.js\c.js，这就是模块化应用；
+        组件化：应用中的功能都是多组件的方式编写。
+     -->
+    <script src="../00-js/vue.js"></script>
+    <!-- 非单文件组件： 一个文件中有多个组件。
+          单文件组件：一个文件只有一个组件 -->
+  </head>
+  <body>
+    <div id="root">
+      <school></school>
+      <hr />
+      <student></student>
+    </div>
+
+    <script type="text/javascript">
+      // Vue.extend(options)中的options，new Vue怎么写Vue.extend就怎么写。但是extend没有el选项。
+      // 简写形式：const school = Vue.extend(options); 简写为 const school = options;
+      const school = Vue.extend({
+        // 只要设置了name字段，指定该组件在开发者工具中呈现的名字
+        name: "SchoolFLJ",
+        template: `
+                <div>
+                    <h1>{{name}}</h1>    
+                    <h1>{{dp}}</h1>
+                </div>
+            `,
+        data() {
+          return { name: "浙江大学", dp: "信息与电气工程学院" };
+        },
+      });
+
+      const student = Vue.extend({
+        template: `
+                <div>
+                    <h1>{{name}}</h1>    
+                    <h1>{{age}}</h1>    
+                </div>
+            `,
+        data() {
+          return { name: "FLJ", age: "18" };
+        },
+      });
+
+      Vue.component();
+
+      new Vue({
+        el: "#root",
+        // 局部注册
+        components: {
+          // 简写
+          school,
+          student,
+        },
+        // components:{
+        //     school: school,
+        //     student: student,
+        // }
+        // 关于组件名：
+        //  1. 一个单词写法：(1)首字母小写school; (2)首字母大写School;
+        //  2. 多个单词写法：(1)kebab-case命名：my-school (2)CamelCase写法：MySchool,但是这种写法需要Vue脚手架支持。
+      });
+    </script>
+  </body>
+</html>

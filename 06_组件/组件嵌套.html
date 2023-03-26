@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组件嵌套</title>
+    <script src="../00-js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+
+    </div>
+
+    <script type="text/javascript">
+      const student = Vue.extend({
+        template: `
+                <div>
+                    <h1>{{name}}</h1>    
+                    <h1>{{age}}</h1>    
+                </div>
+            `,
+        data() {
+          return { name: "FLJ", age: "18" };
+        },
+      });
+
+      const school = Vue.extend({
+        // 只要设置了name字段，指定该组件在开发者工具中呈现的名字
+        name: "SchoolFLJ",
+        template: `
+                <div>
+                    <h1>{{name}}</h1>    
+                    <h1>{{dp}}</h1>
+                    <student></student>  
+                </div>
+            `,
+        data() {
+          return { name: "浙江大学", dp: "信息与电气工程学院" };
+        },
+        components: {
+          student,
+        },
+      });
+
+      const hello = Vue.extend({
+        template: `
+                <div>
+                    Hello
+                </div>
+            `,
+      });
+
+      const app = {
+        name: "app",
+        template: `
+            <div>
+                <hello></hello>
+                <school></school>
+            </div>
+        `,
+        components: {
+            hello,
+            school
+        }
+      };
+      new Vue({
+        el: "#root",
+        template: `
+            <app></app>
+        `,
+        components: {
+          app,
+        },
+      });
+    </script>
+  </body>
+</html>

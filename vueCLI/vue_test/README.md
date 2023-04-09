@@ -15,3 +15,8 @@
         第二部使用混入，例如：
             (1)全局混入：Vue.mixins(xxx)，表示全局的vue组件，vc\vm都会混入
             (2)局部混入：mixins: [xxx]
+
+## webStorage
+    存储内容大小一般为5MB左右。
+localStorage 本地存储，一直存储。
+sessionStorage 存储的内容会随着浏览器窗口关闭而消失。

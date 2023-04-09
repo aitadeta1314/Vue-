@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器本地存储sessionStorage</title>
+</head>
+<body>
+    <h1>sessionStorage 浏览器关闭之后数据也会删除</h1>
+    <button onclick="saveData()">存储值</button>
+    <button onclick="getData()">读取值</button>
+    <button onclick="deleteData()">删除一个值</button>
+    <button onclick="clearData()">清空值</button>
+
+    <script type="text/javascript">
+        function saveData() {
+            let p = {'name': 'FLJ', 'value': 19}
+            // setItem存储的key value都是String类型的值
+            window.sessionStorage.setItem('person', JSON.stringify(p))
+        }
+
+        function getData() {
+            let p = {'name': 'FLJ', 'value': 19}
+            // getItem 读取值。
+            const result = window.sessionStorage.getItem('person')
+            console.log(typeof result);
+            // JSON.parse(null)的结果也是null。
+            console.log(JSON.parse(result));
+            console.log(typeof JSON.parse(result));
+        }
+
+        function deleteData(){
+            sessionStorage.removeItem('person');
+        }
+
+        function clearData() {
+            sessionStorage.clear();
+        }
+
+    </script>
+    
+</body>
+</html>

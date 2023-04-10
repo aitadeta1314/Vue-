@@ -58,3 +58,20 @@ sessionStorage 存储的内容会随着浏览器窗口关闭而消失。
             this.$bus.$off('xxxx')
         }
    ```
+## 消息订阅与发布（pubsub）,Vue中推荐使用`全局事件总线`
+1. 一种组件的通信方式，适用于任何组件间通信。
+2. 使用步骤：
+    - 安装pubsub，`npm i pubsub-js`;
+    - 引入库 `import pubsub from 'pubsub-js'`;
+    - 接收数据：A组件想接收数据，则在A中订阅消息，订阅的回调留在A组件自身。
+    ```
+    methods(){
+        demo(msgName, data) {...}
+    },
+    mounted() {
+        // xxx是事件名
+        this.pubId = pubsub.subscribe('xxx', this.demo)
+    }
+    ```
+    - 发送数据：pubsub.publish('xxx', data数据)
+    - 最好在beforeDestroy方法中，pubsub.unsubscribe(this.pubId)去<font color="ff0000">取消订阅</font>

@@ -1,18 +1,16 @@
 <template>
     <div class="app">
-        <School />
-        <Student />
+        <Count />
     </div>
 </template>
 
 <script>
-import School from "./components/School.vue";
-import Student from "./components/Student.vue";
+import Count from "./components/Count.vue";
+
 export default {
     name: "App",
     components: {
-        Student,
-        School,
+        Count,
     },
 
 };

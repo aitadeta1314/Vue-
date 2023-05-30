@@ -43,15 +43,22 @@ const mutations = {
     },
 };
 
-// 准备state，用于存储数据；类似`菜`
+// 准备state，用于存储数据；类似`菜`；类似Vue中的data属性
 const state = {
-    sum: 0,
+    sum: 1,
 };
 
+// 准备getters，用于将state中的数据进行加工；类似Vue中的computed属性
+const getters = {
+    bigSum(state) {
+        return state.sum * 10
+    }
+};
 
 export default new Vuex.Store({
     // ...
     actions,
     mutations,
     state,
+    getters,
 })

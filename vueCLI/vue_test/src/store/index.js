@@ -39,7 +39,7 @@ const mutations = {
     },
     "JIAN": function (state, value) {
         console.log('mutations中JIAN函数被调用了')
-        state.sum += value;
+        state.sum -= value;
     },
 };
 

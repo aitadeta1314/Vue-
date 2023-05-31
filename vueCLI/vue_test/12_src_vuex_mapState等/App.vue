@@ -1,20 +1,16 @@
 <template>
     <div class="app">
         <Count />
-        <hr>
-        <Person />
     </div>
 </template>
 
 <script>
-import Count from "./components/Count";
-import Person from './components/Person';
+import Count from "./components/Count.vue";
 
 export default {
     name: "App",
     components: {
         Count,
-        Person,
     },
 
 };

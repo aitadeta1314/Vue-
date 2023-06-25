@@ -7,8 +7,7 @@
 
         <!-- 2. 跳转路由并携带query参数， to的对象写法。-->
         <router-link :to="{
-            // path:'/home/message/detail', // 简化前，写完成路径；
-            name: 'xiangqing',              // 简化后，直接通过名字跳转。
+            path:'/home/message/detail',
             query:m
         }">
             {{ m.title }}

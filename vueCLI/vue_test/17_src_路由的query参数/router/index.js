@@ -19,7 +19,6 @@ export default new VueRouter({
       component: Home,
       children: [
         {
-          name: "xinwen", // 命名路由
           path: "news",
           component: News,
         },
@@ -28,7 +27,6 @@ export default new VueRouter({
           component: Message,
           children: [
             {
-              name: "xiangqing", // 命名路由name,作用：简化路由的跳转。
               path: "detail",
               component: Detail,
             },

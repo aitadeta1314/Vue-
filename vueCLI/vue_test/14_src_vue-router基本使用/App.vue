@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xs-offset-2 col-xs-8">
                 <div class="page-header">
-                    <Banner />
+                    <h2>Router Demo</h2>
                 </div>
             </div>
         </div>
@@ -33,12 +33,12 @@
 </template>
 
 <script>
-import Banner from './components/Banner.vue'
+
 
 export default {
     name: "App",
     components: {
-        Banner
+
     },
 
 };

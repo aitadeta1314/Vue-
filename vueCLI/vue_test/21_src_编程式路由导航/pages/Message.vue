@@ -62,9 +62,6 @@ export default {
                 query: m
             });
         },
-    },
-    beforeDestroy() {
-        console.log('Message组件即将销毁了')
-    },
+    }
 };
 </script>

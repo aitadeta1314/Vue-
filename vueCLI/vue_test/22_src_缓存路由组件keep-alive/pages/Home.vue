@@ -13,11 +13,16 @@
             </ul>
             <!-- include="News" 表示缓存News组件；如果不写include，则表示缓存所有出现在此位置的组件。
                 注意：这里写的News为组件名 -->
+                
+            <!-- 1. 如果想缓存一个组件 -->
             <!-- <keep-alive include="News"> -->
-            <keep-alive include="News_Peiqi">
+            <!-- <keep-alive include="News_Peiqi"> -->
+
+            <!-- 2. 如果想缓存多个组件，使用数组写法，如下： -->
+            <keep-alive :include="['News_Peiqi', 'Message']">
                 <router-view></router-view>
             </keep-alive>
-            
+
         </div>
     </div>
 </template>

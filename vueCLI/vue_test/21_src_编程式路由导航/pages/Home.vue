@@ -11,13 +11,7 @@
                     <router-link class="list-group-item" active-class="active" to="/home/message">Message</router-link>
                 </li>
             </ul>
-            <!-- include="News" 表示缓存News组件；如果不写include，则表示缓存所有出现在此位置的组件。
-                注意：这里写的News为组件名 -->
-            <!-- <keep-alive include="News"> -->
-            <keep-alive include="News_Peiqi">
-                <router-view></router-view>
-            </keep-alive>
-            
+            <router-view></router-view>
         </div>
     </div>
 </template>

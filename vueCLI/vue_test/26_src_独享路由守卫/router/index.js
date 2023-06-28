@@ -13,29 +13,41 @@ const router = new VueRouter({
             name: "guanyu",
             path: "/about",
             component: About,
+            meta: { title: '关于' },
         },
         {
             name: 'zhuye',
             path: "/home",
             component: Home,
+            meta: { title: '首页' },
             children: [
                 {
                     name: "xinwen", // 命名路由
                     path: "news",
                     component: News,
-                    meta: {isAuth: true},
+                    meta: { isAuth: true, title: '新闻', },
+                    beforeEnter: (to, from, next) => {
+                        // 独享路由守卫，只有前置、没有后置。
+                        if (localStorage.getItem('school') === 'atguigu') {
+                            next()
+                        } else {
+                            // 拦截
+                            alert('学校名称不对（来自`独享路由守卫`）')
+                        }
+                    }
                 },
                 {
                     name: "xiaoxi",
                     path: "message",
                     component: Message,
-                    meta: {isAuth: true},
+                    meta: { isAuth: true, title: '消息', },
                     children: [
                         {
                             name: "xiangqing", // 命名路由name,作用：简化路由的跳转。
                             path: "detail", // query传参，to的字符串写法。
                             // path: "detail/:id/:title", // params传参，to的字符串写法。使用占位声明接收params参数。
                             component: Detail,
+                            meta: { isAuth: true, title: '详情', },
                             // props第一种写法(用的非常少，死数据)，值为对象，该对象中的所有key-value都会以props的形式传给Detail组件。
                             //   props: {'a': 1, 'b': 'hello'},
 
@@ -70,26 +82,29 @@ const router = new VueRouter({
 });
 
 // 全局前置路由守卫 ———— 初始化的时候被调用，每次路由切换之前被调用。
-router.beforeEach((to, from, next) => {
-    console.log('@')
-    console.log(to)
-    console.log(from)
-    /// 调用next才会跳转
-    // next()
-    // !!! 加上判断就会控制是否跳转到对应的路由
-    // if (to.name === 'xinwen' || to.name === 'xiaoxi') { // 繁琐
-    if (to.meta.isAuth) {
-        // 浏览器调试模式Application -> 本地存储中设置key-value
-        if (localStorage.getItem('school') === 'atguigu') {
-            next()
-        } else {
-            // 拦截
-            alert('学校名称不对')
-        }
-    } else {
-        next();
-    }
+// router.beforeEach((to, from, next) => {
+//     console.log('前置路由守卫', to, from)
+//     /// 调用next才会跳转
+//     // next()
+//     // !!! 加上判断就会控制是否跳转到对应的路由
+//     if (to.meta.isAuth) {
+//         if (localStorage.getItem('school') === 'atguigu') {
+//             next()
+//         } else {
+//             // 拦截
+//             alert('学校名称不对')
+//         }
+//     } else {
+//         next();
+//     }
 
+// });
+
+// 全局后置路由守卫 ———— 初始化的时候被调用，每次路由切换之 后 被调用。
+router.afterEach((to, from) => {
+    console.log('后置路由守卫', to, from)
+    /// 放置在这里最保险！！因为走到这里说明已经切换完成了（后置守卫）
+    document.title = to.meta.title || '开源系统'
 });
 
 /// 创建并暴露一个路由器

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,21 +9,27 @@
     <!-- 开发版本的vue -->
     <script src="../00-js/vue.js"></script>
 </head>
+
 <body>
     <!-- 准备一个容器 -->
     <div id="root">
         <h1>Hello, {{name.toUpperCase()}}, {{ address }}</h1>
     </div>
-<script>
-    Vue.config.productionTip = false
-    // Shift + 刷新： 浏览器强制刷新。
 
-    // 创建Vue实例。实例和容器必须一一对应！！！
-    new Vue({el: "#root",
-        data: {name: "Vue", address: "浙江大学国家大学科技园"}
-    });
-
-</script>
     
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        // Shift + 刷新： 浏览器强制刷新。
+
+        // 创建Vue实例。实例和容器必须一一对应！！！
+        new Vue({
+            el: "#root",
+            data: { name: "Vue", address: "浙江大学国家大学科技园" }
+        });
+
+    </script>
+
 </body>
+
 </html>

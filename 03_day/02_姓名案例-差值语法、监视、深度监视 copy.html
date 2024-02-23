@@ -52,7 +52,7 @@
           // 监视多级结构中某个属性的变化。
           "number.a": {
             handler(newValue, oldValue) {
-              console.log("a被监视啦");
+              console.log("a被监视啦", newValue.a, oldValue.a);
             },
           },
           // 监视多级结构中所有属性的变化。

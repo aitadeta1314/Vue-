@@ -28,6 +28,7 @@
         computed: {
           info: {
             get() {
+              console.log("走到这里了啊");
               return this.isHot ? "炎热" : "寒冷";
             },
             set(value) {

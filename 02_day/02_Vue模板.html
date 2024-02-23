@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,9 @@
     <title>02_Vue模板</title>
     <script src="../00-js/vue.js"></script>
 </head>
+
 <body>
-    
+
     <div id="root">
         <h1>你好，插值语法</h1>
         <h3>你好，{{ name }}</h3>
@@ -17,7 +19,7 @@
         <!-- `v-bind:`简写为 `:` -->
         <a v-bind:href="url">百度一下</a>
         <a :href="url.toUpperCase()">百度一下</a>
-        </div>
+    </div>
     <script>
         Vue.config.productionTip = false
 
@@ -30,4 +32,5 @@
         });
     </script>
 </body>
+
 </html>

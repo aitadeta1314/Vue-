@@ -35,7 +35,8 @@
             /// 'abc'.indexOf('') = 0;
             // 'abc'.indexOf('a') = 0;
             return this.items.filter((p) => {
-              return p.name.indexOf(this.keyWord) !== -1;
+              console.log(p.name, p.name.indexOf(this.keyWord));
+              return p.name.indexOf(this.keyWord) != -1;
             });
           },
         },

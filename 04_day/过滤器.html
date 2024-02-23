@@ -13,20 +13,22 @@
     <div id="root">
         <h1>显示格式化之后的时间</h1>
         <!-- 计算属性实现 -->
-        <h3>现在时间是：{{timeFormatter}}</h3>
+        <h3>现在时间是1：{{timeFormatter}}</h3>
         <!-- methods实现 -->
-        <h3>现在时间是：{{getFmtFormatter()}}</h3>
+        <h3>现在时间是2：{{getFmtFormatter()}}</h3>
 
         <!-- 过滤器实现 -->
         <!-- 过滤器只用于
             1. 插值语法{{}}, 
             2. v-bind:属性='xxx | 过滤器名' 
         -->
-        <h3>现在时间是：{{time | filterFmtFormatter}}</h3>
+        <h3>现在时间是3：{{time | filterFmtFormatter}}</h3>
         <!-- 默认传递两个参数，第一个就是time -->
-        <h3>现在时间是：{{time | filterFmtFormatter('YYYY_MM_DD')}}</h3>
+        <h3>现在时间是4：{{time | filterFmtFormatter('YYYY_MM_DD')}}</h3>
         <!-- 层层往下传递 -->
-        <h3>现在时间是：{{time | filterFmtFormatter('YYYY_MM_DD') | mySlice}}</h3>
+        <h3>现在时间是5：{{time | filterFmtFormatter('YYYY_MM_DD') | mySlice}}</h3>
+
+        <h3>{{"time_String".slice(0, 8)}}</h3>
     </div>
 
     <script>

@@ -26,12 +26,12 @@
       <!--变化的class样式使用 Vue :class管理 - 字符串写法
             适用于：样式的类名不确定，需要动态绑定。
         -->
-      <div class="basic" :class="mood" @click="changeMood">test</div>
+      <div class="basic" :class="mood" @click="changeMood">test1</div>
 
       <!--变化的class样式使用 Vue :class管理 - 数组写法
             适用于：绑定样式的个数不确定，名字也不确定。
         -->
-      <div class="basic" :class="classArr" @click="changeMood">test</div>
+      <div class="basic" :class="classArr" @click="changeMood">test2</div>
 
       <!--变化的class样式使用 Vue :class管理 - 对象写法
             适用于：绑定样式的个数确定，名字确定，但是需要动态决定要不要用。
@@ -63,7 +63,7 @@
         styleObj: { fontSize: "40px", color: "red", backgroundColor: "green" },
       },
       methods: {
-        changeMood: function () {
+        changeMood () {
           this.mood = "sad";
         },
       },

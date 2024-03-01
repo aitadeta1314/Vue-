@@ -13,6 +13,7 @@
 
 <script>
 import { nanoid } from "nanoid";
+import { mapState } from "vuex";
 export default {
   name: "Person",
   data() {
@@ -21,6 +22,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(["personList"]),
     personList() {
         /// 不借助mapState，纯自己手写；
       return this.$store.state.personOptions.personList;

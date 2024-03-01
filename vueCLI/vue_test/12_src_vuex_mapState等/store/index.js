@@ -16,6 +16,7 @@ const actions = {
     //     console.log('jian函数被调用了', context, value)
     //     context.commit('JIAN', value)
     // },
+    // !!! context 为 mini版的 store。格式为{commit: function, dispatch: function() {}, getters: function(){},state:{}}
     "jiaOdd": function (context, value) {
         console.log('actions中的jiaOdd函数被调用了', context, value)
         if (context.state.sum % 2) {
@@ -33,6 +34,7 @@ const actions = {
 
 // 准备mutations，用于操作数据；真正处理数据的地方，类似`后厨`
 const mutations = {
+    
     "JIA": function (state, value) {
         console.log('mutations中JIA函数被调用了')
         state.sum += value;

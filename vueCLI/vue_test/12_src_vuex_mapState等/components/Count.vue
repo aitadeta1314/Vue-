@@ -30,6 +30,7 @@ export default {
         }
     },
     computed: {
+        
         /// 1. 靠程序员自己生成的计算属性
         // sum() {
         //     return this.$store.state.sum
@@ -42,7 +43,8 @@ export default {
         // },
 
         /// 2. 将mapState中的Map值 合并到 computed的Map中来 ...mapState()
-        /// 借助mapState生成计算属性，从state中读取数据。（!!!! 对象写法)
+        /// ...为`展开运算符`。
+        /// 第一种写法：借助mapState生成计算属性，从state中读取数据。（!!!! 对象写法)
         // ...mapState({sum: 'sum', company: 'company', which:'which'}),
 
         /// 借助mapState生成计算属性，从state中读取数据。（!!!! 数组写法)
@@ -94,6 +96,8 @@ export default {
     },
     mounted() {
         console.log(mapState({sum: 'sum', company: 'company', which:'which'}))
+        // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 一样的写法，只不过 js中 key自动转化为字符串。
+        console.log(mapState({'sum': 'sum', 'company': 'company', 'which':'which'}))
     },
 }
 </script>
